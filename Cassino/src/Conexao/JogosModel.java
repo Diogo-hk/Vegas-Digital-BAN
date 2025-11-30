@@ -17,7 +17,7 @@ public class JogosModel {
         PreparedStatement st;
         st = con.prepareStatement("INSERT INTO Jogos (idJogos, taxaRTP) VALUES (?,?)");
         st.setInt(1, a.getIdJogos());
-        st.setInt(2, a.getTaxaRTP());
+        st.setFloat(2, a.getTaxaRTP());
         st.execute();
         st.close();
     }
