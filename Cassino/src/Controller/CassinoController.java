@@ -45,4 +45,13 @@ public class CassinoController {
             System.out.println(it.next().toString());
         }
     }
+    public void deleteCassinoController(Connection con) throws SQLException {
+        Scanner input = new Scanner(System.in);
+        System.out.println("---- DELETAR CASSINO ----");
+        System.out.print("Informe o ID do Cassino que deseja deletar: ");
+        int idCassino = input.nextInt();
+
+        CassinoModel.delete(idCassino, con);
+        System.out.println("Cassino deletado com sucesso!!");
+    }
 }
