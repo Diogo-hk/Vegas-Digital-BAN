@@ -59,4 +59,17 @@ public class MovimentacaoFinanceiraController {
         MovimentacaoFinanceiraModel.delete(idMovimentacao, con);
         System.out.println("Movimentação deletada com sucesso!!");
     }
+
+    public void listarMovimentacoesDetalhadas(Connection con) throws SQLException {
+        System.out.println("---- RELATÓRIO DE MOVIMENTAÇÕES (COM NOMES) ----");
+        HashSet<String> lista = MovimentacaoFinanceiraModel.listMovimentacoesComNomes(con);
+        
+        if (lista.isEmpty()) {
+            System.out.println("Nenhuma movimentação encontrada.");
+        } else {
+            for (String item : lista) {
+                System.out.println(item);
+            }
+        }
+    }
 }
