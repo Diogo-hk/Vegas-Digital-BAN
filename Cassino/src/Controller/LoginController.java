@@ -3,7 +3,7 @@ package controller;
 import java.sql.Connection;
 import model.UsuarioBean;
 import repository.UsuarioRepository;
-import util.Conexao;
+import Conexao.Conexao;
 
 public class LoginController {
 
