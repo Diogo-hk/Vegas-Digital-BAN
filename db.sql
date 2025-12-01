@@ -1,3 +1,4 @@
+
 CREATE TABLE Usuario (
     idUser INT PRIMARY KEY,
     nomeUsuario VARCHAR(100) NOT NULL,
@@ -19,25 +20,25 @@ CREATE TABLE Cassino (
 
 CREATE TABLE Jogos (
     idJogos INT PRIMARY KEY,
-    taxaRTP DECIMAL(6,2) NOT NULL i
+    taxaRTP DECIMAL(6,2) NOT NULL
 );
 
 CREATE TABLE Roleta (
     idJogos INT PRIMARY KEY,
     tipoRoleta VARCHAR(30) NOT NULL,
-    CONSTRAINT fk_roleta_jogos FOREIGN KEY (idJogos) REFERENCES Jogos(idJogos)
+    CONSTRAINT fk_roleta_jogos FOREIGN KEY (idJogos) REFERENCES Jogos(idJogos) ON DELETE CASCADE
 );
 
 CREATE TABLE Blackjack (
     idJogos INT PRIMARY KEY,
     quantidadeBaralhos INT NOT NULL,
-    CONSTRAINT fk_blackjack_jogos FOREIGN KEY (idJogos) REFERENCES Jogos(idJogos)
+    CONSTRAINT fk_blackjack_jogos FOREIGN KEY (idJogos) REFERENCES Jogos(idJogos) ON DELETE CASCADE
 );
 
 CREATE TABLE Poker (
     idJogos INT PRIMARY KEY,
     tipoPoker INT NOT NULL,
-    CONSTRAINT fk_poker_jogos FOREIGN KEY (idJogos) REFERENCES Jogos(idJogos)
+    CONSTRAINT fk_poker_jogos FOREIGN KEY (idJogos) REFERENCES Jogos(idJogos) ON DELETE CASCADE
 );
 
 CREATE TABLE Sessao (
@@ -45,8 +46,8 @@ CREATE TABLE Sessao (
     idJogos INT,
     idCassino INT,
     nomeSessao VARCHAR(60) NOT NULL,
-    CONSTRAINT fk_sessao_jogos FOREIGN KEY (idJogos) REFERENCES Jogos(idJogos),
-    CONSTRAINT fk_sessao_cassino FOREIGN KEY (idCassino) REFERENCES Cassino(idCassino)
+    CONSTRAINT fk_sessao_jogos FOREIGN KEY (idJogos) REFERENCES Jogos(idJogos) ON DELETE SET NULL,
+    CONSTRAINT fk_sessao_cassino FOREIGN KEY (idCassino) REFERENCES Cassino(idCassino) ON DELETE SET NULL
 );
 
 CREATE TABLE Jogar (
@@ -56,10 +57,9 @@ CREATE TABLE Jogar (
     retorno DECIMAL(15,2) NOT NULL,
     dataHora DATE NOT NULL,
     PRIMARY KEY (idSessao, idUsuario),
-    CONSTRAINT fk_jogar_sessao FOREIGN KEY (idSessao) REFERENCES Sessao(idSessao),
-    CONSTRAINT fk_jogar_usuario FOREIGN KEY (idUsuario) REFERENCES Usuario(idUser)
+    CONSTRAINT fk_jogar_sessao FOREIGN KEY (idSessao) REFERENCES Sessao(idSessao) ON DELETE CASCADE,
+    CONSTRAINT fk_jogar_usuario FOREIGN KEY (idUsuario) REFERENCES Usuario(idUser) ON DELETE CASCADE
 );
-
 
 CREATE TABLE Funcionario (
     idFunc INT PRIMARY KEY,
@@ -67,10 +67,9 @@ CREATE TABLE Funcionario (
     idCassino INT,
     nome VARCHAR(60) NOT NULL,
     cpf VARCHAR(60) NOT NULL UNIQUE,
-    CONSTRAINT fk_funcionario_sessao FOREIGN KEY (idSessao) REFERENCES Sessao(idSessao),
-    CONSTRAINT fk_funcionario_cassino FOREIGN KEY (idCassino) REFERENCES Cassino(idCassino)
+    CONSTRAINT fk_funcionario_sessao FOREIGN KEY (idSessao) REFERENCES Sessao(idSessao) ON DELETE SET NULL,
+    CONSTRAINT fk_funcionario_cassino FOREIGN KEY (idCassino) REFERENCES Cassino(idCassino) ON DELETE SET NULL
 );
-
 
 CREATE TABLE PagamentoSalario (
     idPag INT PRIMARY KEY,
@@ -78,8 +77,8 @@ CREATE TABLE PagamentoSalario (
     idFunc INT,
     valor DECIMAL(15,2) NOT NULL,
     dataPagamento DATE NOT NULL,
-    CONSTRAINT fk_pagamento_cassino FOREIGN KEY (idCassino) REFERENCES Cassino(idCassino),
-    CONSTRAINT fk_pagamento_func FOREIGN KEY (idFunc) REFERENCES Funcionario(idFunc)
+    CONSTRAINT fk_pagamento_cassino FOREIGN KEY (idCassino) REFERENCES Cassino(idCassino) ON DELETE SET NULL,
+    CONSTRAINT fk_pagamento_func FOREIGN KEY (idFunc) REFERENCES Funcionario(idFunc) ON DELETE SET NULL
 );
 
 CREATE TABLE MovimentacaoFinanceira (
@@ -90,6 +89,6 @@ CREATE TABLE MovimentacaoFinanceira (
     valor DECIMAL(15,2) NOT NULL,
     dataHora DATE NOT NULL,
     metodoPagamento VARCHAR(30) NOT NULL,
-    CONSTRAINT fk_movimentacao_cassino FOREIGN KEY (idCassino) REFERENCES Cassino(idCassino),
-    CONSTRAINT fk_movimentacao_usuario FOREIGN KEY (idUsuario) REFERENCES Usuario(idUser)
+    CONSTRAINT fk_movimentacao_cassino FOREIGN KEY (idCassino) REFERENCES Cassino(idCassino) ON DELETE SET NULL,
+    CONSTRAINT fk_movimentacao_usuario FOREIGN KEY (idUsuario) REFERENCES Usuario(idUser) ON DELETE SET NULL
 );
