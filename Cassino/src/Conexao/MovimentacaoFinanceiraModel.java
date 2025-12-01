@@ -55,4 +55,23 @@ public class MovimentacaoFinanceiraModel {
         st.execute();
         st.close();
     }
+
+    public static HashSet<String> listMovimentacoesComNomes(Connection con) throws SQLException {
+        HashSet<String> list = new HashSet<>();
+        Statement st = con.createStatement();
+        String sql = "SELECT m.idMovimentacao, u.nomeUsuario, m.tipoTransacao, m.valor " +
+                     "FROM MovimentacaoFinanceira m " +
+                     "JOIN Usuario u ON m.idUsuario = u.idUser";
+        
+        ResultSet rs = st.executeQuery(sql);
+        while(rs.next()) {
+            // Formatando o resultado como String para exibição
+            String linha = "ID Mov: " + rs.getInt("idMovimentacao") +
+                           " | Usuário: " + rs.getString("nomeUsuario") +
+                           " | Tipo: " + rs.getString("tipoTransacao") +
+                           " | Valor: R$ " + rs.getDouble("valor");
+            list.add(linha);
+        }
+        return list;
+    }
 }
