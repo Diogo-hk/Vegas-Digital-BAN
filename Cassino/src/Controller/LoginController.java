@@ -1,8 +1,8 @@
-package controller;
+package Controller;
 
 import java.sql.Connection;
-import model.UsuarioBean;
-import repository.UsuarioRepository;
+import Model.UsuarioBean;
+import Repository.UsuarioRepository;
 import Conexao.Conexao;
 
 public class LoginController {
