@@ -49,4 +49,14 @@ public class MovimentacaoFinanceiraController {
             System.out.println(it.next().toString());
         }
     }
+
+    public void deleteMovimentacao(Connection con) throws SQLException {
+        Scanner input = new Scanner(System.in);
+        System.out.println("---- DELETAR MOVIMENTAÇÃO FINANCEIRA ----");
+        System.out.print("Informe o ID da Movimentação que deseja deletar: ");
+        int idMovimentacao = input.nextInt();
+
+        MovimentacaoFinanceiraModel.delete(idMovimentacao, con);
+        System.out.println("Movimentação deletada com sucesso!!");
+    }
 }
