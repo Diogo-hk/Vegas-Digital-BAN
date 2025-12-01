@@ -1,18 +1,16 @@
 package Dados;
 
 public class Poker extends Jogos{
-    private tipoPoker tipoPoker;
+    private int tipoPoker;
 
-    public Poker(int idJogos, float taxaRTP, Dados.tipoPoker tipoPoker) {
+    public Poker(int idJogos, float taxaRTP, int tipoPoker) {
         super(idJogos, taxaRTP);
         this.tipoPoker = tipoPoker;
     }
 
-    public Dados.tipoPoker getTipoPoker() {
+    public int getTipoPoker() {
         return tipoPoker;
     }
 
-    public void setTipoPoker(Dados.tipoPoker tipoPoker) {
-        this.tipoPoker = tipoPoker;
-    }
+
 }
