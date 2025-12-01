@@ -42,4 +42,13 @@ public class FuncionarioController {
             System.out.println(it.next().toString());
         }
     }
+    public void deleteFuncionarioController(Connection con) throws SQLException {
+        Scanner input = new Scanner(System.in);
+        System.out.println("---- DELETAR FUNCIONÁRIO ----");
+        System.out.print("Informe o ID do Funcionário que deseja deletar: ");
+        int idFunc = input.nextInt();
+
+        FuncionarioModel.delete(idFunc, con);
+        System.out.println("Funcionário deletado com sucesso!!");
+    }
 }
