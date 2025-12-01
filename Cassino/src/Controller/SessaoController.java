@@ -26,4 +26,13 @@ public class SessaoController {
             System.out.println(s);
         }
     }
+    public void deleteSessao(Connection con) throws SQLException {
+        Scanner input = new Scanner(System.in);
+        System.out.println("---- DELETAR SESSÃO ----");
+        System.out.print("Informe o ID da Sessão que deseja deletar: ");
+        int idSessao = input.nextInt();
+
+        SessaoModel.delete(idSessao, con);
+        System.out.println("Sessão deletada com sucesso!!");
+    }
 }
