@@ -29,4 +29,12 @@ public class PagamentoSalarioModel {
         }
         return list;
     }
+
+    public static void delete(int idPag, Connection con) throws SQLException {
+        PreparedStatement st;
+        st = con.prepareStatement("DELETE FROM PagamentoSalario WHERE idPag = ?");
+        st.setInt(1, idPag);
+        st.execute();
+        st.close();
+    }
 }
