@@ -89,4 +89,13 @@ public class JogosController {
             System.out.println(it.next().toString());
         }
     }
+    public void deleteJogo(Connection con) throws SQLException {
+        Scanner input = new Scanner(System.in);
+        System.out.println("---- DELETAR JOGO ----");
+        System.out.print("Informe o ID do Jogo que deseja deletar: ");
+        int idJogos = input.nextInt();
+
+        JogosModel.delete(idJogos, con);
+        System.out.println("Jogo deletado com sucesso!!");
+    }
 }
