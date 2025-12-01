@@ -34,4 +34,12 @@ public class JogosModel {
         return list;
     }
 
+    public static void delete(int idJogos, Connection con) throws SQLException {
+        PreparedStatement st;
+        st = con.prepareStatement("DELETE FROM Jogos WHERE idJogos = ?");
+        st.setInt(1, idJogos);
+        st.execute();
+        st.close();
+    }
+
 }
