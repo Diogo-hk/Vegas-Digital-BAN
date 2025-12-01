@@ -24,4 +24,11 @@ public class SessaoModel {
         }
         return list;
     }
+    public static void delete(int idSessao, Connection con) throws SQLException {
+        PreparedStatement st;
+        st = con.prepareStatement("DELETE FROM Sessao WHERE idSessao = ?");
+        st.setInt(1, idSessao);
+        st.execute();
+        st.close();
+    }
 }
