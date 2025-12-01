@@ -27,4 +27,14 @@ public class PagamentoSalarioController {
             System.out.println(p);
         }
     }
+
+    public void deletePagamento(Connection con) throws SQLException {
+        Scanner input = new Scanner(System.in);
+        System.out.println("---- DELETAR PAGAMENTO ----");
+        System.out.print("Informe o ID do Pagamento que deseja deletar: ");
+        int idPag = input.nextInt();
+
+        PagamentoSalarioModel.delete(idPag, con);
+        System.out.println("Pagamento deletado com sucesso!!");
+    }
 }
