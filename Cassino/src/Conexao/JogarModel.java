@@ -28,4 +28,13 @@ public class JogarModel {
         }
         return list;
     }
+
+    public static void delete(int idSessao, int idUsuario, Connection con) throws SQLException {
+        PreparedStatement st;
+        st = con.prepareStatement("DELETE FROM Jogar WHERE idSessao = ? AND idUsuario = ?");
+        st.setInt(1, idSessao);
+        st.setInt(2, idUsuario);
+        st.execute();
+        st.close();
+    }
 }
