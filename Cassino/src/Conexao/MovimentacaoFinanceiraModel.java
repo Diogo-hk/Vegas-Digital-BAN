@@ -47,4 +47,12 @@ public class MovimentacaoFinanceiraModel {
         }
         return list;
     }
+
+    public static void delete(int idMovimentacao, Connection con) throws SQLException {
+        PreparedStatement st;
+        st = con.prepareStatement("DELETE FROM MovimentacaoFinanceira WHERE idMovimentacao = ?");
+        st.setInt(1, idMovimentacao);
+        st.execute();
+        st.close();
+    }
 }
