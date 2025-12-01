@@ -17,6 +17,8 @@ public class Main {
                 switch (op) {
                     case 1: new JogosController().createJogosController(con);
                         break;
+                    case 2: new JogosController().listarJogos(con);
+                        break;
                     default:
                         break;
                 }
@@ -34,6 +36,7 @@ public class Main {
         System.out.println("");
         System.out.println("Informe o número da opção que desejas executar: ");
         System.out.println("1 - Inserir um novo Jogo");
+        System.out.println("2 - Listar todos os Jogos");
         System.out.println("Digite qualquer outro valor para sair");
         System.out.print("Sua opção: ");
         Scanner input = new Scanner(System.in);

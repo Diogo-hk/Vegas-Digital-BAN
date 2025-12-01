@@ -22,11 +22,11 @@ public class JogosModel {
         st.close();
     }
 
-    static HashSet listAll(Connection con) throws SQLException {
+     public static HashSet listAll(Connection con) throws SQLException {
         Statement st;
         HashSet list = new HashSet();
         st = (Statement) con.createStatement();
-        String sql = "SELECT nroa, capacidade, andar FROM ambulatorios";
+        String sql = "SELECT idJogos, taxaRTP FROM jogos";
         ResultSet result = st.executeQuery(sql);
         while(result.next()) {
             list.add(new Jogos(result.getInt(1), result.getInt(2)));

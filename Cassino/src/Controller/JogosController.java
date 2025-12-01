@@ -22,9 +22,17 @@ public class JogosController {
         System.out.print("idJogos: ");
         int idJogos = input.nextInt();
         System.out.print("taxa: ");
-        int taxaRTP = input.nextInt();
+        float taxaRTP = input.nextFloat();
         Jogos jg = new Jogos(idJogos, taxaRTP);
         JogosModel.create(jg, con);
         System.out.println("Jogo criado com sucesso!!");
     }
+    public void listarJogos(Connection con) throws SQLException {
+        HashSet all = JogosModel.listAll(con);
+        Iterator<Jogos> it = all.iterator();
+        while(it.hasNext()) {
+            System.out.println(it.next().toString());
+        }
+    }
 }
+
