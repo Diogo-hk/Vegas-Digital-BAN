@@ -43,4 +43,12 @@ public class CassinoModel {
         }
         return list;
     }
+
+    public static void delete(int idCassino, Connection con) throws SQLException {
+        PreparedStatement st;
+        st = con.prepareStatement("DELETE FROM Cassino WHERE idCassino = ?");
+        st.setInt(1, idCassino);
+        st.execute();
+        st.close();
+    }
 }
