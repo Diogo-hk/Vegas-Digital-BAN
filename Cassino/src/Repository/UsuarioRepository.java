@@ -1,10 +1,10 @@
-package repository;
+package Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.UsuarioBean; // <--- Faltava importar isso
+import Model.UsuarioBean; // <--- Faltava importar isso
 
 public class UsuarioRepository {
     private Connection conexao;
@@ -14,7 +14,7 @@ public class UsuarioRepository {
     }
 
     //pega do banco e valida
-    public UsuarioBean autenticar(String email, String senha){
+    public Model.UsuarioBean autenticar(String email, String senha){
         String sql = "SELECT * FROM public.usuario WHERE email = ? AND senha = ?";
 
         try {
@@ -26,7 +26,7 @@ public class UsuarioRepository {
 
             if (rs.next())
             {
-                UsuarioBean usuario = new UsuarioBean();
+                Model.UsuarioBean usuario = new Model.UsuarioBean();
                 usuario.setIdUsuario(rs.getInt("iduser"));
                 usuario.setNomeUsuario(rs.getString("nomeusuario"));
                 usuario.setCpf(rs.getString("cpf"));
