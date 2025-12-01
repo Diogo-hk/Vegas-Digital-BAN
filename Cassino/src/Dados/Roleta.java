@@ -2,18 +2,15 @@ package Dados;
 
 public class Roleta extends Jogos{
 
-    private tipoRoleta tipoRoleta;
+    private int tipoRoleta;
 
-    public Roleta(int idJogos, float taxaRTP, Dados.tipoRoleta tipoRoleta) {
+    public Roleta(int idJogos, float taxaRTP, int tipoRoleta) {
         super(idJogos, taxaRTP);
         this.tipoRoleta = tipoRoleta;
     }
 
-    public Dados.tipoRoleta getTipoRoleta() {
+    public int getTipoRoleta() {
         return tipoRoleta;
     }
 
-    public void setTipoRoleta(Dados.tipoRoleta tipoRoleta) {
-        this.tipoRoleta = tipoRoleta;
-    }
 }

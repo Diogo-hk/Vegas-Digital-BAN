@@ -1,8 +1,12 @@
 import Conexao.Conexao;
 import Controller.CassinoController;
 import Controller.FuncionarioController;
+import Controller.JogarController;
 import Controller.JogosController;
 import Controller.MovimentacaoFinanceiraController;
+import Controller.PagamentoSalarioController;
+import Controller.SessaoController;
+import Dados.PagamentoSalario;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -42,17 +46,35 @@ public class Main {
                     case 8:
                         new MovimentacaoFinanceiraController().listarMovimentacoes(con);
                         break;
+                    case 9: 
+                    	new SessaoController().createSessao(con); 
+                    	break;
+                    case 10: 
+                    	new SessaoController().listarSessao(con); 
+                    	break;
+                    case 11: 
+                    	new JogarController().createJogada(con); 
+                    	break;
+                    case 12: 
+                    	new JogarController().listarJogadas(con); 
+                    	break;
+                    case 13: 
+                    	new PagamentoSalarioController().createPagamento(con); 
+                    	break;
+                    case 14: 
+                    	new PagamentoSalarioController().listarPagamentos(con); 
+                    	break;
                     default:
                         System.out.println("Saindo...");
                         break;
                 }
             } catch (SQLException ex) {
                 System.out.println("Erro na operação: " + ex.getMessage());
-                // ex.printStackTrace(); // Descomente para debug se necessário
+                
             }
-        } while (op > 0 && op < 9);
+        } while (op > 0 && op < 15);
 
-        c.closeConnection(); // É boa prática fechar a conexão pelo objeto wrapper se disponível, ou con.close()
+        c.closeConnection(); 
     }
 
     private static int menu() {
@@ -67,14 +89,20 @@ public class Main {
         System.out.println("6 - Listar todos os Funcionários");
         System.out.println("7 - Inserir uma nova Movimentação Financeira");
         System.out.println("8 - Listar todas as Movimentações Financeiras");
+        System.out.println("9 - Inserir um novo sessao");
+        System.out.println("10 - Listar todos os sessoes");
+        System.out.println("11 - Inserir uma nova jogada");
+        System.out.println("12 - Listar todos as jogadas");
+        System.out.println("13 - Inserir um novo pagamento ");
+        System.out.println("14 - Listar todos os pagamento de salario");
         System.out.println("Digite qualquer outro valor para sair");
         System.out.print("Sua opção: ");
         Scanner input = new Scanner(System.in);
-        // Tratamento simples para evitar erro se o usuário digitar texto
+      
         if (input.hasNextInt()) {
             return input.nextInt();
         } else {
-            return 0; // Retorna 0 para sair se não for número
+            return 0; 
         }
     }
 }

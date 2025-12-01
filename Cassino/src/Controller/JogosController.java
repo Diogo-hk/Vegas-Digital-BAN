@@ -5,8 +5,6 @@ import Dados.Blackjack;
 import Dados.Jogos;
 import Dados.Poker;
 import Dados.Roleta;
-import Dados.tipoPoker;
-import Dados.tipoRoleta;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,12 +18,11 @@ public class JogosController {
         Scanner input = new Scanner(System.in);
         System.out.println("---- CRIAR NOVO JOGO ----");
 
-        // Dados Comuns (Superclasse Jogos)
         System.out.print("ID do Jogo: ");
         int idJogos = input.nextInt();
-        System.out.print("Taxa RTP (ex: 95,5): ");
+        System.out.print("Taxa RTP: ");
         float taxaRTP = input.nextFloat();
-        input.nextLine(); // Limpar buffer
+        input.nextLine(); 
 
         System.out.println("Selecione o tipo de jogo:");
         System.out.println("1 - Roleta");
@@ -33,23 +30,21 @@ public class JogosController {
         System.out.println("3 - Poker");
         System.out.print("Opção: ");
         int opcao = input.nextInt();
-        input.nextLine(); // Limpar buffer
+        input.nextLine();
 
         Jogos novoJogo = null;
 
         try {
             switch (opcao) {
-                case 1: // Roleta
-                    System.out.println("Tipos de Roleta disponíveis: ONLINE, ROTATORIA, LEGAL");
+                case 1: 
                     System.out.print("Digite o tipo da Roleta: ");
                     String tipoRStr = input.nextLine().toUpperCase();
-                    // Converte String para Enum
-                    tipoRoleta tipoR = tipoRoleta.valueOf(tipoRStr);
+                    int tipoR = Integer.valueOf(tipoRStr);
 
                     novoJogo = new Roleta(idJogos, taxaRTP, tipoR);
                     break;
 
-                case 2: // Blackjack
+                case 2: 
                     System.out.print("Quantidade de Baralhos: ");
                     int qtdBaralhos = input.nextInt();
 
@@ -60,8 +55,8 @@ public class JogosController {
                     System.out.println("Tipos de Poker disponíveis: TEXAS, HOLDEM");
                     System.out.print("Digite o tipo de Poker: ");
                     String tipoPStr = input.nextLine().toUpperCase();
-                    // Converte String para Enum
-                    tipoPoker tipoP = tipoPoker.valueOf(tipoPStr);
+
+                    int tipoP = Integer.valueOf(tipoPStr);
 
                     novoJogo = new Poker(idJogos, taxaRTP, tipoP);
                     break;
@@ -71,7 +66,6 @@ public class JogosController {
                     return;
             }
 
-            // Envia para o Model, que saberá tratar a herança
             if (novoJogo != null) {
                 JogosModel.create(novoJogo, con);
                 System.out.println("Jogo criado com sucesso!");
