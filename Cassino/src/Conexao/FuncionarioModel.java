@@ -42,4 +42,12 @@ public class FuncionarioModel {
         }
         return list;
     }
+
+    public static void delete(int idFunc, Connection con) throws SQLException {
+        PreparedStatement st;
+        st = con.prepareStatement("DELETE FROM Funcionario WHERE idFunc = ?");
+        st.setInt(1, idFunc);
+        st.execute();
+        st.close();
+    }
 }
