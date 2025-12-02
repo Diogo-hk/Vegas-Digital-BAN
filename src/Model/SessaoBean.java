@@ -6,7 +6,8 @@ public class SessaoBean {
     private int idCassino;
     private String nomeSessao;
 
-    // Getters e Setters
+    public SessaoBean() {}
+
     public int getIdSessao() { return idSessao; }
     public void setIdSessao(int idSessao) { this.idSessao = idSessao; }
     public int getIdJogos() { return idJogos; }

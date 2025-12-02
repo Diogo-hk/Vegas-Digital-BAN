@@ -12,20 +12,17 @@ public class JogosController {
         this.repository = new JogosRepository(new Conexao().getConnection());
     }
 
-    public void cadastrar(int tipo, double rtp, String dadoTexto, int dadoInt) {
-        // Tipo: 1=Roleta, 2=Poker, 3=Blackjack
+    public void cadastrarComplexo(int tipo, double rtp, String dadoTexto, int dadoInt) {
         repository.cadastrarJogoEspecifico(rtp, tipo, dadoTexto, dadoInt);
     }
 
     public void listar() {
         List<JogosBean> lista = repository.listarTodos();
-        System.out.println("\n--- JOGOS DISPONÍVEIS ---");
-        if (lista.isEmpty()) {
-            System.out.println("Nenhum jogo cadastrado.");
-        } else {
-            for (JogosBean j : lista) {
-                System.out.println("ID: " + j.getIdJogos() + " | Jogo: " + j.getNome() + " | RTP: " + j.getTaxaRTP() + "%");
-            }
+        System.out.println("\n--- JOGOS ---");
+        for (JogosBean j : lista) {
+            System.out.println("ID: " + j.getIdJogos() + " | " + j.getNome() + " | RTP: " + j.getTaxaRTP() + "%");
         }
     }
+
+    public void remover(int id) { repository.remover(id); }
 }

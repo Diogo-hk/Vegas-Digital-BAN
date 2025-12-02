@@ -1,41 +1,39 @@
 import Controller.UsuarioController;
 import View.CadastroView;
-
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int opcao;
-        // Inicia o sistema
-        System.out.println("Iniciando Sistema do Cassino...");
         UsuarioController controller = new UsuarioController();
+        int opcao = 9;
+        System.out.println("=== CASSINO VEGAS ===");
+        System.out.println("1 - Login");
+        System.out.println("2 - Cadastrar");
+        System.out.print("Opção: ");
 
-        do {
-
-            System.out.println("Escolha uma opção:");
-            System.out.println("(1) - Login");
-            System.out.println("(2) - Cadastrar-se");
+        while (opcao != 0) {
             opcao = scanner.nextInt();
+            scanner.nextLine();
 
-            if(opcao == 1){
-                System.out.println("----- TELA DE LOGIN -----");
-                System.out.print("Digite seu Email: ");
-                scanner.nextLine();
+            if (opcao == 1) {
+                System.out.print("Email: ");
                 String email = scanner.nextLine();
 
-                System.out.print("Digite sua Senha: ");
+                System.out.print("Senha: ");
                 String senha = scanner.nextLine();
 
-                // Tenta logar
                 controller.entrarNoSistema(email, senha);
-            }
 
-            else if(opcao == 2){
+            } else if (opcao == 2) {
                 new CadastroView().exibirFormulario();
+            } else if (opcao == 0) {
+                break;
             }
-
-        } while (opcao != 0);
+             else {
+                System.out.println("Opção inválida");
+            }
+        }
         scanner.close();
     }
 }

@@ -1,13 +1,12 @@
 package Controller;
 
 import java.sql.Connection;
+import java.util.List;
 import Model.UsuarioBean;
 import Repository.UsuarioRepository;
 import Util.Conexao;
-import View.AdminView;
 
 public class UsuarioController {
-
     private UsuarioRepository repository;
     private Connection conexao;
 
@@ -17,36 +16,35 @@ public class UsuarioController {
         this.repository = new UsuarioRepository(this.conexao);
     }
 
-    // Lógica de Login
     public void entrarNoSistema(String email, String senha) {
         UsuarioBean usuario = repository.autenticar(email, senha);
-
         if (usuario == null) {
             System.out.println("ERRO: Login inválido!");
         } else {
             System.out.println("SUCESSO: Bem-vindo, " + usuario.getNomeUsuario());
             if ("ADMIN".equalsIgnoreCase(usuario.getStatus())) {
-                System.out.println(">> Acessando Painel ADMIN...");
                 new View.AdminView().exibirMenuAdmin(usuario.getNomeUsuario());
             } else {
-                System.out.println(">> Acessando Jogos...");
+                new View.UsuarioComumView().exibirUsuarioMenu(usuario);
             }
         }
     }
 
     public boolean cadastrarUsuario(String nome, String cpf, String email, String senha) {
-        UsuarioBean novoUsuario = new UsuarioBean();
-        novoUsuario.setNomeUsuario(nome);
-        novoUsuario.setCpf(cpf);
-        novoUsuario.setEmail(email);
-        novoUsuario.setSenha(senha);
+        UsuarioBean novo = new UsuarioBean();
+        novo.setNomeUsuario(nome); novo.setCpf(cpf); novo.setEmail(email); novo.setSenha(senha);
+        return repository.salvar(novo);
+    }
 
-        if (repository.salvar(novoUsuario)) {
-            System.out.println("CADASTRO REALIZADO! Agora faça login.");
-            return true;
-        } else {
-            System.out.println("ERRO AO CADASTRAR. Tente novamente.");
-            return false;
+    public void listarUsuarios() {
+        List<UsuarioBean> lista = repository.listarTodos();
+        System.out.println("\n--- LISTA DE USUÁRIOS ---");
+        for(UsuarioBean u : lista) {
+            System.out.println("ID: " + u.getIdUsuario() + " | Nome: " + u.getNomeUsuario() + " | Status: " + u.getStatus());
         }
+    }
+
+    public void removerUsuario(int id) {
+        repository.remover(id);
     }
 }

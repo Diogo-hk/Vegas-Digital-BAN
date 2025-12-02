@@ -13,27 +13,15 @@ public class Conexao {
         String senha = "diogo4545";
 
         try {
-            // Carrega o driver
             Class.forName("org.postgresql.Driver");
             this.con = DriverManager.getConnection(url, user, senha);
         } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println("Erro na Conexão: " + ex.getMessage());
+            System.out.println("FATAL: Erro na Conexão com o Banco.");
             ex.printStackTrace();
         }
     }
 
     public Connection getConnection() {
         return con;
-    }
-
-    // Método para fechar conexão (opcional, mas boa prática)
-    public void fecharConexao() {
-        try {
-            if (con != null && !con.isClosed()) {
-                con.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }

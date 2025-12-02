@@ -14,7 +14,6 @@ public class SessaoRepository {
     }
 
     public void criarSessao(SessaoBean sessao) {
-        // Atenção aos nomes das colunas do seu banco (fk_idjogos, fk_idcassino)
         String sql = "INSERT INTO public.sessao (fk_idjogos, fk_idcassino, nomesessao) VALUES (?, ?, ?)";
         try {
             PreparedStatement ps = conexao.prepareStatement(sql);
@@ -22,9 +21,9 @@ public class SessaoRepository {
             ps.setInt(2, sessao.getIdCassino());
             ps.setString(3, sessao.getNomeSessao());
             ps.execute();
-            System.out.println("SUCESSO: Sessão aberta!");
+            System.out.println("Sessão aberta!");
         } catch (SQLException e) {
-            System.out.println("ERRO ao criar sessão (Verifique se os IDs existem): " + e.getMessage());
+            System.out.println("Erro ao criar sessão: " + e.getMessage());
         }
     }
 
@@ -43,5 +42,16 @@ public class SessaoRepository {
             }
         } catch (SQLException e) { e.printStackTrace(); }
         return lista;
+    }
+
+    public void remover(int id) {
+        try {
+            PreparedStatement ps = conexao.prepareStatement("DELETE FROM public.sessao WHERE idsessao = ?");
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            System.out.println("SUCESSO: Sessão fechada.");
+        } catch (SQLException e) {
+            System.out.println("ERRO ao remover sessão: " + e.getMessage());
+        }
     }
 }

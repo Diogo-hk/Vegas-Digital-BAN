@@ -8,11 +8,11 @@ import Util.Conexao;
 
 public class CassinoRepository {
     private Connection conexao;
+
     public CassinoRepository(Connection conexao) {
         this.conexao = conexao;
     }
 
-    // 1. INSERIR
     public void inserir(CassinoBean cassino) {
         String sql = "INSERT INTO public.cassino (cnpj, nome, cep, cidade, banca) VALUES (?, ?, ?, ?, ?)";
         try {
@@ -29,7 +29,6 @@ public class CassinoRepository {
         }
     }
 
-    // 2. REMOVER
     public void remover(int idCassino) {
         String sql = "DELETE FROM public.cassino WHERE idcassino = ?";
         try {
@@ -42,7 +41,6 @@ public class CassinoRepository {
         }
     }
 
-    // 3. LISTAR
     public List<CassinoBean> listarTodos() {
         List<CassinoBean> lista = new ArrayList<>();
         String sql = "SELECT * FROM public.cassino ORDER BY idcassino";
@@ -62,7 +60,6 @@ public class CassinoRepository {
         return lista;
     }
 
-    // 4. RELATÓRIO (SOMA TOTAL)
     public double calcularPatrimonioTotal() {
         String sql = "SELECT SUM(banca) as total FROM public.cassino";
         try {
